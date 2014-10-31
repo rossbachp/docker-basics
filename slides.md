@@ -90,11 +90,6 @@ $ docker pull redis:latest
 ***
   * **Wichtig:** Tag mit angeben! Sonst wird das gesamte Repository gezogen (z.B. Ubuntu 12.04/12.10/13.04/13.10/14.04  >> 1GB)
 
----
-## Docker-Images
-
-![](images/docker-command-images-deck.png)
-
 -
 **`~$ docker images | inspect`**
 #### Die lokalen Images ansehen
@@ -619,6 +614,29 @@ Image 96864a7d2df3 already pushed, skipping
 ffdb1d64ba4d: Image successfully pushed
 Pushing tag for rev [ffdb1d64ba4d] on {http://127.0.0.1:5000/v1/repositories/infrabricks/apache2/tags/latest}
 ```
+-
+### Docker Push/Pull
+```bash
+$ docker login
+$ docker push "infrabricks/apache2:latest"
+```
+![](images/Docker-push-pull.png)
+
+***
+  * `docker pull <username>/<imagename>:<tag>`
+-
+### Sharing
+
+![](images/gift_of_sharing_colorpg.jpg)
+
+***
+[gift_of_sharing]( http://morethanasandwich.files.wordpress.com/2012/01/gift_of_sharing_colorpg.jpg)
+
+---
+## Docker-Images
+
+![](images/docker-command-images-deck.png)
+
 -
 **`~$ docker run --link `**
 #### Container miteinander verknüpfen
