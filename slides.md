@@ -23,7 +23,6 @@ Die Werbung verspricht:
 
 ![](images/docker-command-daemon-deck.png)
 
--
 **`~$ docker version` **
 #### Bestimmung der Version
 
@@ -49,7 +48,6 @@ Git commit (server): c78088f
 
 ![](images/docker-command-registry-deck.png)
 
--
 **`~$ docker search`**
 ####  Auf der Suche nach dem goldenen Image
 
@@ -72,7 +70,6 @@ centos    The official build of CentOS.   442       [OK]
   * Versionen (z.B. hier von CentOS) werden nicht angezeigt, nur das Repository
   * Besser zum Suchen: [Docker Hub](https://registry.hub.docker.com/search)
 
--
 **`~$ docker pull`**
 ####  Wir brauchen das Image lokal um es zu verwenden
 
@@ -90,7 +87,6 @@ $ docker pull redis:latest
 ***
   * **Wichtig:** Tag mit angeben! Sonst wird das gesamte Repository gezogen (z.B. Ubuntu 12.04/12.10/13.04/13.10/14.04  >> 1GB)
 
--
 **`~$ docker images | inspect`**
 #### Die lokalen Images ansehen
 
@@ -108,7 +104,7 @@ $ docker inspect 70214e5d0a90
     "Comment": "",
 ...
 ```
--
+
 **`~$ docker rmi`**
 ####  Ein lokales Image entfernen
 
@@ -126,7 +122,6 @@ $ docker rmi 70214e5d0a90
   * D.h. das Image lebt erstmal weiter, auch wenn der Container schon weg ist.
   * --force hilft im Notfall.
 
--
 **`~$ docker history`**
 #### Zeig die Befehlshistorie des Images an
 ```bash
@@ -147,7 +142,6 @@ c2a5714574ba        35 hours ago        /bin/sh -c groupadd -r tomcat -g 4242 &&
 
 ![](images/docker-command-images-deck.png)
 
--
 **`~$ docker run`**
 ####  Das wichtigste Kommando: Container starten!
 
@@ -167,7 +161,7 @@ CTRL+P CTRL+Q zum detachen der shell
   * Im Image ist optional ein Kommando integriert.
   * Im Fall der Bash hier: Ein `exit` oder `CTRL-D` beendet die Shell, d.h. den Prozess, d.h. den Container.
   * So ist der Container aber noch laufigfähig vorhanden!
--
+
 ### Was bedeutet ein `docker start`?
 
   * Müssen wir hier nicht erklären, was wirklich passiert ist?
@@ -181,7 +175,7 @@ CTRL+P CTRL+Q zum detachen der shell
       - Volumen mounten
       - Ports Freigeben
     - Prozess starten mit einem bestimmten Nutzer
--
+
 **`~$ docker ps`**
 ####  Container anzeigen
 
@@ -203,11 +197,11 @@ e6aa98c81a41
   * Der Status ist leider schlecht grep-bar.
   * Es existieren verschiedene Filtermöglichkeiten (`docker ps --help`)
 
--
+
 **`~$ docker ps | attach`** 
 #### Sich mit interaktiven Containern verbinden
 
--
+
 **`~$ docker rm `**
 #### Alte Container abräumen
 
@@ -224,7 +218,7 @@ e6aa98c81a41
   * Funktioniert nur mit abgelaufenen Containern (außer dann mit --force)
   * Besser: Beim run direkt --rm mitgeben
 
--
+
 **`~$ docker logs`**
 ####  Ausgabe von Container anschauen
 
@@ -241,7 +235,7 @@ exit
   * `-t == timestamps`
   * `-tail == nur die letzten x Zeilen anzeigen`
 
--
+
 **`~$ docker events`**
  #### Ereignisse des Docker Daemons ansehen
 
@@ -254,7 +248,7 @@ $ docker events
 ***
   * Keine Besonderheiten. Nett zum Kennenlernen/Debuggen.
   * Sehr wichtig für Discovery-Mechanismen (l8r)
--
+
 **`~$ docker diff `**
 #### Unterschiede im Filesystem anzeigen
 
@@ -276,7 +270,7 @@ D /etc/sysctl.conf
 ```
 ***
   * Keine Besonderheiten. Interessantes Debugging-Werkzeug.
--
+
 **`~$ docker top`**
 #### Prozessdetails eines Containers anzeigen
 
@@ -326,7 +320,7 @@ CTRL+P, CTRL+Q
 Wenn wir apachectl -D FOREGROUD nutzen klappt es!
 ```
 
--
+
 **`~$ docker commit`**
 #### Den Dateisystem-Stand festhalten
 
@@ -354,7 +348,7 @@ REPOSITORY               TAG                 IMAGE ID            CREATED        
 ---
 ## Weiter gehts
 
--
+
 **`~$ docker tag`**
 ####  Namen für Images
 
@@ -405,8 +399,9 @@ vagrant@docker-workshop:~$ curl http://127.0.0.1:8000/
   `docker ps, docker top, docker inspect`
 
 ---
-**`~$ docker stop | kill`** 
-#### Container stoppen
+
+**`~$ docker stop | kill`**
+####  Container stoppen
 
 Sendet SIGTERM und/oder SIGKILL an einen Container-Prozess
 ***
@@ -444,7 +439,7 @@ bfb8b5a2ad34        4 days ago          /bin/sh -c #(nop) ADD file:a889e7d86acdb
 ***
 Interessant ist die SIZE-Spalte, welche Aktion wie viel zum FS-Volumen beigetragen hat ( Squashing *)
 
--
+
 **`~$ docker run | VOLUMES`** 
 #### Mounten von Verzeichnissen in Container
 
@@ -494,7 +489,7 @@ ADD html/index.html /var/www/html/index.html
 ENTRYPOINT ["/usr/sbin/apache2"]
 CMD ["-D", "FOREGROUND"]
 ```
--
+
 **`~$ docker build`**
 #### Definierte Container-Images bauen
 
@@ -545,9 +540,9 @@ CONTAINER ID        IMAGE                    COMMAND                CREATED     
 
 ~$ docker stop web && docker rm web
 ```
--
-**`~$ docker port `**
-#### “Anonyme“ Port-Mappings anzeigen
+
+**`~$ docker port`**
+####  “Anonyme“ Port-Mappings anzeigen
 
 Wenn keine expliziten Port-Mappings mit –p angegeben werden, verwendet Docker freie High-Ports.
 Das Port-Kommando zeigt diese an.
@@ -566,7 +561,7 @@ c2bbd009cf3b        infrabricks/apache2:latest   /usr/sbin/apache2 -D   14 secon
 ```
 ***
 Keine Besonderheiten
--
+
 **`~$ docker save | load`** 
 #### Container-Images als Tarballs transportieren
 Speichert die FS-Layer eines Images als Tarball.
@@ -590,7 +585,7 @@ Bringt erstaunlicherweise die Prozessorlast des Hosts hoch.
 ### Übung:
 Save, danach mit rmi images löschen und laden.
 
--
+
 **`~$ docker push `**
 #### Ein Image in eine (private) Registry hochladen
 
@@ -614,7 +609,7 @@ Image 96864a7d2df3 already pushed, skipping
 ffdb1d64ba4d: Image successfully pushed
 Pushing tag for rev [ffdb1d64ba4d] on {http://127.0.0.1:5000/v1/repositories/infrabricks/apache2/tags/latest}
 ```
--
+
 ### Docker Push/Pull
 ```bash
 $ docker login
@@ -624,7 +619,7 @@ $ docker push "infrabricks/apache2:latest"
 
 ***
   * `docker pull <username>/<imagename>:<tag>`
--
+
 ### Sharing
 
 ![](images/gift_of_sharing_colorpg.jpg)
@@ -637,7 +632,7 @@ $ docker push "infrabricks/apache2:latest"
 
 ![](images/docker-command-images-deck.png)
 
--
+
 **`~$ docker run --link `**
 #### Container miteinander verknüpfen
 Ein Container wird mit einem bereits laufenden Container „verknüpft“ – der neue Container erhält Environmentvariablen und Netzwerk-Freischaltungen
